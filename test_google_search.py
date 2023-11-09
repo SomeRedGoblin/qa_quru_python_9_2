@@ -10,7 +10,7 @@ def full_screen_browser():
     browser.open('https://google.com')
     yield
     print("\nТут могла быть Ваша реклама")
-    browser.close()
+    browser.quit()
 
 
 def test_search_in_google(full_screen_browser):
@@ -21,5 +21,5 @@ def test_search_in_google(full_screen_browser):
 def test_unhappy_search_in_google(full_screen_browser):
     search_request = "nothingfoundinthissearchandiwillbehappy"
     browser.element('[name="q"]').should(be.blank).type(search_request).press_enter()
-    browser.element('//div[@id="botstuff"]').should(
+    browser.element('[id="botstuff"]').should(
         have.text('По запросу ' + search_request + ' ничего не найдено.'))
